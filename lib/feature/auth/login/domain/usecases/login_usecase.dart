@@ -9,7 +9,7 @@ class LoginUseCase {
 
   LoginUseCase(this.loginRepositories);
 
-  Future<Either<Failure, String>> call(LoginEntity loginEntity) {
+  Future<Either<Failure, int>> call(LoginEntity loginEntity) {
     return loginRepositories.login(loginEntity);
   }
 }

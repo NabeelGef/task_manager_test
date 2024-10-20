@@ -53,7 +53,7 @@ class AppDialog extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 13.sp),
                 colorText: kColorWhite,
                 textSize: 15.sp,
-                colorButton: kColorGrey,
+                colorButton: kColorPlaceholder,
                 textWidget: noText ?? "cancel",
                 fontWeightText: FontWeight.bold,
                 onTap: onTapNo ??

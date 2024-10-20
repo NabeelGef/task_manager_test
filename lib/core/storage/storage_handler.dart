@@ -1,6 +1,4 @@
-import 'dart:convert';
 
-import 'package:dartz/dartz.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,9 +16,11 @@ class StorageHandler {
   }
 
   Future<void> setToken(String token) => storage.setString(Words.token,token);
+  Future<void> setUserId(int userId) => storage.setInt(Words.userId,userId);
 
 
 //================Auth===============
 
   String? get accessToken => storage.getString(Words.token);
+  int? get userId => storage.getInt(Words.userId);
 }

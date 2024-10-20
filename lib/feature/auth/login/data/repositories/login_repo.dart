@@ -16,7 +16,7 @@ class LoginRepositoriesImpl implements LoginRepositories {
       {required this.loginRemoteDataSourceImpl, required this.networkInfo});
 
   @override
-  Future<Either<Failure, String>> login(LoginEntity loginEntity) async {
+  Future<Either<Failure, int>> login(LoginEntity loginEntity) async {
     LoginModel loginModel =
         LoginModel(userName: loginEntity.userName, password: loginEntity.password);
     if (await networkInfo.isConnected) {

@@ -18,4 +18,9 @@ class AppResponse{
   T? toFromJson<T>(T Function(Map<String, dynamic> json) fromJson) {
     return data["data"]==null?null :data["data"] is bool ? null : fromJson(data["data"]);
   }
+  List<T> toListTodo<T>(T Function(Map<String, dynamic> json) fromJson) {
+    return (data["todos"]as List)
+        .map((e) => fromJson(e))
+        .toList();
+  }
 }

@@ -76,7 +76,7 @@ class DioNetworkHelper extends NetworkHelper {
         );
       log("Options===>${response.requestOptions.extra}");
       log("Status Code ==> ${response.toAppResponse.statusCode}");
-      print("Response ==> ${response.toAppResponse.data}");
+      log("Response ==> ${response.toAppResponse.data}");
       return response.toAppResponse;
     } on DioException catch (e,stack) {
       log("Dio Exception ==> ${e.message}");
@@ -84,14 +84,13 @@ class DioNetworkHelper extends NetworkHelper {
       log("Dio Exception Type ==> ${e.type}");
       log("response Error  ==> ${e.response}");
       if (e.response != null && e.response?.statusCode != 200 &&isCached) {
-        print("Errrror conditions");
         throw ServerException(message: e.response?.data["message"],statusCode: e.response!.statusCode!);
       }else if (e.response != null && e.response?.statusCode != 200 &&!isCached){
         throw ServerException(message: e.response?.data["message"],statusCode: e.response!.statusCode!);
       }
       throw OfflineException();
     } catch (e,stack) {
-      log("Error Catch ==> ${e} ,, in ${stack}");
+      log("Error Catch ==> $e ,, in $stack");
       rethrow;
     }
   }
@@ -121,7 +120,7 @@ class DioNetworkHelper extends NetworkHelper {
         data: data,
       );
       if (response.data['errors'] != null) {
-        print(response.data['errors']);
+        log(response.data['errors']);
         throw  ServerException(message: response.data["message"],statusCode: response.statusCode!);
       }
       log("Status Code ==> ${response.toAppResponse.statusCode}");
@@ -136,7 +135,7 @@ class DioNetworkHelper extends NetworkHelper {
       }
       throw  OfflineException();
     } catch (e , stack) {
-      log("Error Catch ==> ${e} ,, in ${stack}");
+      log("Error Catch ==> $e ,, in $stack");
       rethrow;
     }
   }
@@ -146,6 +145,10 @@ class DioNetworkHelper extends NetworkHelper {
       {Map<String, String>? headers,
       Map<String, dynamic>? body,
       Map<String, String>? files}) async {
+
+      log("url Put ==> ${ApisWords.BASEURL}/$url");
+      log("header ==> $_headers");
+
     try {
       dynamic data = body;
       if (files != null) {
@@ -159,14 +162,22 @@ class DioNetworkHelper extends NetworkHelper {
           options:
               Options(headers: {..._headers, if (headers != null) ...headers}),
           data: data);
+      log("Status Code ==> ${response.toAppResponse.statusCode}");
+      log("Response ==> ${response.toAppResponse.data}");
+
       return response.toAppResponse;
-    } on DioException catch (e) {
+    } on DioException catch (e,stack) {
       if (e.response != null) {
+        log("Dio Exception ==> ${e.message}");
+        log("Dio Stack ==> $stack");
+        log("Dio Exception Type ==> ${e.type}");
+
         throw ServerException(message: e.response!.data["message"],statusCode: e.response!.statusCode!);
 
       }
       throw OfflineException();
-    } catch (e) {
+    } catch (e,stack) {
+      log("Error Catch ==> $e ,, in $stack");
       rethrow;
     }
   }
@@ -175,18 +186,29 @@ class DioNetworkHelper extends NetworkHelper {
   Future<AppResponse> delete(String url,
       {Map<String, String>? headers, Map<String, dynamic>? body}) async {
     try {
+      log("url DELETE ==> ${ApisWords.BASEURL}/$url");
+      log("header ==> $_headers");
       var response = await _dio.delete(url,
           options:
               Options(headers: {..._headers, if (headers != null) ...headers}),
           data: body);
+      log("Status Code ==> ${response.toAppResponse.statusCode}");
+      log("Response ==> ${response.toAppResponse.data}");
+
       return response.toAppResponse;
-    } on DioException catch (e) {
+    } on DioException catch (e,stack) {
+      log("Dio Exception ==> ${e.message}");
+      log("Dio Stack ==> $stack");
+      log("Dio Exception Type ==> ${e.type}");
+
       if (e.response != null) {
         ServerException(message: e.response!.data["message"],statusCode: e.response!.statusCode!);
 
       }
       throw OfflineException();
-    } catch (e) {
+    } catch (e,stack) {
+      log("Error Catch ==> $e ,, in $stack");
+
       rethrow;
     }
   }

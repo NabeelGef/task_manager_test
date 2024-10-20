@@ -26,7 +26,7 @@ class AppCustomText extends StatelessWidget {
     this.horizontalPadding = 1,
     this.textAlign,
     this.textOverflow,
-    this.maxLines = 1,
+    this.maxLines,
   });
 
   @override
