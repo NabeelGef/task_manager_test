@@ -1,16 +1,19 @@
-# task_manager
+Task Manager APP . 
 
-A new Flutter project.
+it is an Application to show your tasks after logging it and you can create , edit and delete task by easily . 
 
-## Getting Started
+Features : 
+1- Login to the system by userName and password ( username must be not empty also password ) . 
+2- View All Tasks from Apis ( see task ID , description , Is Completed or Not ) .
+3- Create new task by using a form contains field to put your task Title and it will be doesn't completed in the first one .
+4- Edit Task also by using a form contains the old task title and the statues (completed or not ) so you can change The state or The task title or either or neither.
+5- Delete Task after you confirm the process (are you sure to delete task (YES/NO) ) 
+6- you can show some tasks in the first (8 tasks default) but when you scroll to the end The rest of tasks are loaded (Pagination).
+7- you can show your tasks offline and you can get task in online after the internet is returned . 
 
-This project is a starting point for a Flutter application.
+Challenges : 
 
-A few resources to get you started if this is your first Flutter project:
+Moving from online to offline with pagination . 
+design .
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+I hope you like . 
