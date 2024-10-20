@@ -2,9 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:task_manager/feature/task/presentation/bloc/add_task_cubit.dart';
-import 'package:task_manager/feature/task/presentation/bloc/edit_task_cubit.dart';
-import 'package:task_manager/feature/task/presentation/bloc/get_all_task_cubit.dart';
+import 'package:task_manager/feature/task/presentation/bloc/addTaskBloc/add_task_cubit.dart';
+import 'package:task_manager/feature/task/presentation/bloc/editTaskBloc/edit_task_cubit.dart';
+import 'package:task_manager/feature/task/presentation/bloc/viewTaskBloc/get_all_task_cubit.dart';
 import 'core/constant/app_theme.dart';
 import 'core/constant/approuter.dart';
 import 'core/cubit_public/check_internet_cubit.dart';
@@ -12,7 +12,7 @@ import 'core/cubit_public/drop_down_cubit.dart';
 import 'core/cubit_public/navigator_bottom_cubit.dart';
 import 'core/storage/storage_handler.dart';
 import 'feature/auth/login/presentation/bloc/login_bloc.dart';
-import 'feature/task/presentation/bloc/delete_task_cubit.dart';
+import 'feature/task/presentation/bloc/deleteTaskBloc/delete_task_cubit.dart';
 import 'injection_container.dart' as di;
 
 Future<void> main() async {

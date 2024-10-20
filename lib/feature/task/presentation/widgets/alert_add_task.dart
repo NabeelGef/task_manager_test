@@ -14,8 +14,8 @@ import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_dialog.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../core/widgets/app_text_field.dart';
-import '../bloc/add_task_cubit.dart';
-import '../bloc/add_task_state.dart';
+import '../bloc/addTaskBloc/add_task_cubit.dart';
+import '../bloc/addTaskBloc/add_task_state.dart';
 
 class AlertAddTask extends StatelessWidget {
   const AlertAddTask({super.key});

@@ -6,10 +6,10 @@ import 'package:task_manager/feature/task/data/repositories/task_repositories_im
 import 'package:task_manager/feature/task/domain/usecases/deleteTaskUseCase.dart';
 import 'package:task_manager/feature/task/domain/usecases/editTaskUseCase.dart';
 import 'package:task_manager/feature/task/domain/usecases/getAllTasks.dart';
-import 'package:task_manager/feature/task/presentation/bloc/add_task_cubit.dart';
-import 'package:task_manager/feature/task/presentation/bloc/delete_task_cubit.dart';
-import 'package:task_manager/feature/task/presentation/bloc/edit_task_cubit.dart';
-import 'package:task_manager/feature/task/presentation/bloc/get_all_task_cubit.dart';
+import 'package:task_manager/feature/task/presentation/bloc/addTaskBloc/add_task_cubit.dart';
+import 'package:task_manager/feature/task/presentation/bloc/deleteTaskBloc/delete_task_cubit.dart';
+import 'package:task_manager/feature/task/presentation/bloc/editTaskBloc/edit_task_cubit.dart';
+import 'package:task_manager/feature/task/presentation/bloc/viewTaskBloc/get_all_task_cubit.dart';
 import 'core/cubit_public/check_internet_cubit.dart';
 import 'core/cubit_public/drop_down_cubit.dart';
 import 'core/cubit_public/navigator_bottom_cubit.dart';

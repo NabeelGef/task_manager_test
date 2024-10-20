@@ -10,8 +10,8 @@ class GetAllTasks{
 
   GetAllTasks(this.taskRepo);
 
-  Future<Either<Failure,List<TodoEntity>>> call(){
-    return taskRepo.getAllTasks();
+  Future<Either<Failure,List<TodoEntity>>> call(int skip){
+    return taskRepo.getAllTasks(skip);
   }
 
 }

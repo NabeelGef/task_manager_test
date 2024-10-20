@@ -8,7 +8,7 @@ import '../../../../core/strings/apis.dart';
 import '../../../../core/util/app_response.dart';
 
 abstract class TaskRemoteDataSource {
-  Future<List<TodoModel>> getAllTasks();
+  Future<List<TodoModel>> getAllTasks(int skip);
   Future<TodoModel> addTask(String taskName);
   Future<TodoModel> editTask(int taskId,String taskName , bool isCompleted);
   Future<TodoModel> deleteTask(int taskId);
@@ -16,8 +16,12 @@ abstract class TaskRemoteDataSource {
 
 class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
   @override
-  Future<List<TodoModel>> getAllTasks() async {
-    AppResponse response = await NetworkHelper().get(ApisWords.tasks);
+  Future<List<TodoModel>> getAllTasks(int skip) async {
+    AppResponse response = await NetworkHelper().get(ApisWords.tasks,
+        queryParameters: {
+          "limit":8,
+          "skip":skip
+        });
     return response.toListTodo((json) => TodoModel.fromJson(json));
   }
 

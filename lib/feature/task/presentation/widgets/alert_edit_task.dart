@@ -14,8 +14,8 @@ import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_dialog.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../core/widgets/app_text_field.dart';
-import '../bloc/edit_task_cubit.dart';
-import '../bloc/edit_task_state.dart';
+import '../bloc/editTaskBloc/edit_task_cubit.dart';
+import '../bloc/editTaskBloc/edit_task_state.dart';
 
 class AlertEditTask extends StatefulWidget {
   final int taskId;

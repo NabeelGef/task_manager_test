@@ -2,12 +2,12 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manager/feature/task/domain/usecases/editTaskUseCase.dart';
-import 'package:task_manager/feature/task/presentation/bloc/edit_task_state.dart';
+import 'package:task_manager/feature/task/presentation/bloc/editTaskBloc/edit_task_state.dart';
 import 'package:task_manager/feature/task/presentation/bloc/notifier.dart';
 
-import '../../../../core/error/failure.dart';
-import '../../../../core/function/map_failure_to_message.dart';
-import '../../domain/entities/task.dart';
+import '../../../../../core/error/failure.dart';
+import '../../../../../core/function/map_failure_to_message.dart';
+import '../../../domain/entities/task.dart';
 
 class EditTaskCubit extends Cubit<EditTaskState> {
   EditTaskCubit({required this.editTaskUseCase}) : super(InitialEditTaskState());
