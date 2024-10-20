@@ -15,10 +15,10 @@ class TaskRepositoriesImpl implements TaskRepo {
         required this.taskRemoteDataSource,
         required this.networkInfo});
   @override
-  Future<Either<Failure, List<TodoEntity>>> getAllTasks() async {
+  Future<Either<Failure, List<TodoEntity>>> getAllTasks(int skip) async {
     if (await networkInfo.isConnected) {
       try {
-        final remote = await taskRemoteDataSource.getAllTasks();
+        final remote = await taskRemoteDataSource.getAllTasks(skip);
         return Right(remote);
       } on ServerException catch(e){
         return Left(ServerFailure(message: e.message , statusCode: e.statusCode));

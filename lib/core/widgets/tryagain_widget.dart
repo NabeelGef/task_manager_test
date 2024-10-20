@@ -5,8 +5,8 @@ import '../constant/colorsapp.dart';
 import 'app_text.dart';
 
 class TryAgainWidget extends StatelessWidget {
-  VoidCallback onTap;
-  TryAgainWidget({super.key, required this.onTap});
+  final VoidCallback onTap;
+  const TryAgainWidget({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

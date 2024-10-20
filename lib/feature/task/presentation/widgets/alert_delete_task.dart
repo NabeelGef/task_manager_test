@@ -13,8 +13,8 @@ import '../../../../core/function/show_snack_bar.dart';
 import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_dialog.dart';
 import '../../../../core/widgets/app_text.dart';
-import '../bloc/delete_task_cubit.dart';
-import '../bloc/delete_task_state.dart';
+import '../bloc/deleteTaskBloc/delete_task_cubit.dart';
+import '../bloc/deleteTaskBloc/delete_task_state.dart';
 
 class AlertDeleteTask extends StatelessWidget {
   final int taskId;

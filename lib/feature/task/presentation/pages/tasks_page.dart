@@ -3,15 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:task_manager/core/constant/colorsapp.dart';
 import 'package:task_manager/core/widgets/app_appbar.dart';
+import 'package:task_manager/core/widgets/app_pagination_list.dart';
 import 'package:task_manager/core/widgets/app_text.dart';
 import 'package:task_manager/core/widgets/tryagain_widget.dart';
 import 'package:task_manager/feature/task/domain/entities/task.dart';
-import 'package:task_manager/feature/task/presentation/bloc/get_all_task_state.dart';
+import 'package:task_manager/feature/task/presentation/bloc/viewTaskBloc/get_all_task_state.dart';
 import 'package:task_manager/feature/task/presentation/widgets/alert_delete_task.dart';
 import 'package:task_manager/feature/task/presentation/widgets/alert_edit_task.dart';
 
+import '../../../../core/cubit_public/pagination_cubit.dart';
 import '../../../../core/strings/messages.dart';
-import '../bloc/get_all_task_cubit.dart';
+import '../bloc/viewTaskBloc/get_all_task_cubit.dart';
 import '../shimmer.dart';
 import '../widgets/custom_add_task_floating.dart';
 
@@ -25,7 +27,8 @@ class TasksPage extends StatefulWidget {
 class _TasksPageState extends State<TasksPage> {
   @override
   void initState() {
-    BlocProvider.of<GetAllTaskCubit>(context).fetchTasks();
+    PaginationCubit.instance
+        .onRefresh(BlocProvider.of<GetAllTaskCubit>(context).fetchTasks);
     super.initState();
   }
 
@@ -39,16 +42,20 @@ class _TasksPageState extends State<TasksPage> {
           child:  AppCustomAppBar(title: AppMessages.myTasks)),
       body: RefreshIndicator(
         onRefresh: () {
-          return BlocProvider.of<GetAllTaskCubit>(context).fetchTasks();
+          return  PaginationCubit.instance
+              .onRefresh(BlocProvider.of<GetAllTaskCubit>(context).fetchTasks);
+
         },
         child: BlocBuilder<GetAllTaskCubit, GetAllTaskState>(
             builder: (context, state) {
           if (state is GetTasksState) {
+
             return buildTasks(state.tasks.length, state.tasks);
           } else if (state is ErrorTaskState) {
             return Center(
               child: TryAgainWidget(onTap: () {
-                BlocProvider.of<GetAllTaskCubit>(context).fetchTasks();
+                PaginationCubit.instance
+                    .onRefresh(BlocProvider.of<GetAllTaskCubit>(context).fetchTasks);
               }),
             );
           }
@@ -61,54 +68,65 @@ class _TasksPageState extends State<TasksPage> {
   Widget buildTasks(int length, List<TodoEntity> tasks) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ListView.separated(
-        separatorBuilder: (context, index) => SizedBox(height: 3.h),
-        itemCount: length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-              side: const BorderSide(color: kColorMain, width: 1),
-            ),
-            subtitle: Row(
-              children: [
-                Expanded(
-                  child: AppCustomText(
-                      text: tasks[index].todo, colorText: kColorPlaceholder),
+      child:
+      AppCustomPaginationList(
+        loadingWidget: const TaskItemShimmer(),
+          items: tasks,
+          itemWidget: tasks.map((task) {
+            return
+              Container(
+                padding: EdgeInsets.all(15.sp),
+                decoration: BoxDecoration(
+                  color: kColorWhite,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: kColorMain, width: 1),
                 ),
-                GestureDetector(
-                    onTap: () {
-                      showDialog(context: context, builder: (context) {
-                        return AlertEditTask(taskId: tasks[index].id,taskName:
-                        tasks[index].todo,);
-                      });
-                    },
-                    child: const Icon(Icons.edit_square,color: kColorMain,)),
-                SizedBox(width: 3.w,),
-                GestureDetector(
-                    onTap: () {
-                      showDialog(context: context, builder: (context) {
-                        return AlertDeleteTask(taskId: tasks[index].id);
-                      });
-                    },
-                    child: const Icon(Icons.delete,color: kColorMainRed,)),
-                SizedBox(width: 1.w,),
-
-              ],
-            ),
-            trailing: Container(
-              padding: EdgeInsets.all(10.sp),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: tasks[index].completed ? kColorGreen : kColorGrey,
-              ),
-              child: tasks[index].completed ?const Icon(Icons.check,color: kColorWhite)
-              :const Icon(Icons.remove,color: kColorWhite),
-            ),
-            title: AppCustomText(text: "#${tasks[index].id.toString()}"),
-          );
-        },
-      ),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(10.sp),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: task.completed ? kColorGreen : kColorGrey,
+                      ),
+                      child: task.completed ?const Icon(Icons.check,color: kColorWhite)
+                          :const Icon(Icons.remove,color: kColorWhite),
+                    ),
+                    SizedBox(width: 3.w,),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AppCustomText(text: "#${task.id.toString()}"),
+                          AppCustomText(
+                              text: task.todo, colorText: kColorPlaceholder),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 3.w,),
+                    GestureDetector(
+                        onTap: () {
+                          showDialog(context: context, builder: (context) {
+                            return AlertEditTask(taskId: task.id,taskName:
+                            task.todo,);
+                          });
+                        },
+                        child: const Icon(Icons.edit_square,color: kColorMain,)),
+                    SizedBox(width: 3.w,),
+                    GestureDetector(
+                        onTap: () {
+                          showDialog(context: context, builder: (context) {
+                            return AlertDeleteTask(taskId: task.id);
+                          });
+                        },
+                        child: const Icon(Icons.delete,color: kColorMainRed,)),
+                    SizedBox(width: 1.w,),
+                  ],
+                ),
+              );
+          }).toList(),
+          paginatedItems: BlocProvider.of<GetAllTaskCubit>(context).items,
+          fetchItemsList: BlocProvider.of<GetAllTaskCubit>(context).fetchTasks)
     );
   }
 }
