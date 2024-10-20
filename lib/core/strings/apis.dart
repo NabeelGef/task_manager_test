@@ -4,4 +4,9 @@ class ApisWords {
 // =============Auth=========
   static String get login => "/auth/login";
 
+  //=========== Tasks =======
+
+  static String get tasks => "/todos";
+  static String get addTasks => "$tasks/add";
+
 }

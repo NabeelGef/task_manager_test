@@ -2,5 +2,18 @@
   "empty": "Empty Field",
   "sign_in": "Sign In",
   "user_name": "User Name",
-  "enter_password": "Enter Password"
+  "enter_password": "Enter Password",
+  "task_added_successfully": "Task Added Successfully",
+  "task_edited_successfully": "Task Edited Successfully",
+  "task_deleted_successfully": "Task Deleted Successfully",
+  "are_you_sure_delete_task": "Are You Sure delete the task",
+  "task_title": "Task Title",
+  "edit_task": "Edit Task",
+  "yes": "Yes",
+  "add": "Add",
+  "add_new_task": "Add New Task",
+  "edit": "Edit",
+  "delete": "Delete",
+  "is_completed": "Is Completed ?",
+  "my_tasks": "My Tasks"
 }

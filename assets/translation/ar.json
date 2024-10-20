@@ -2,5 +2,18 @@
   "empty": "حقل فارغ",
   "sign_in": "تسجيل الدخول",
   "user_name": "اسم المستخدم",
-  "enter_password": "أدخل كلمة المرور"
+  "enter_password": "أدخل كلمة المرور",
+  "task_added_successfully": "تمت إضافة المهمة بنجاح",
+  "task_edited_successfully": "تم تعديل المهمة بنجاح",
+  "task_deleted_successfully": "تم حذف المهمة بنجاح",
+  "are_you_sure_delete_task": "هل أنت متأكد من حذف المهمة؟",
+  "task_title": "عنوان المهمة",
+  "edit_task": "تعديل المهمة",
+  "yes": "نعم",
+  "add": "إضافة",
+  "add_new_task": "إضافة مهمة جديدة",
+  "edit": "تعديل",
+  "delete": "حذف",
+  "is_completed": "هل تم إكمالها؟",
+  "my_tasks": "مهامي"
 }

@@ -30,7 +30,7 @@ class LoginPage extends StatelessWidget {
             if (state is ErrorLoginState) {
               customShowSnackBar(context: context, message: state.message);
             } else if (state is MessageSuccessLoginState) {
-                StorageHandler().setToken(state.accessToken);
+                StorageHandler().setUserId(state.id);
                 context.pushReplacement(AppRouter.tasksScreen);
             }
           },
@@ -111,8 +111,6 @@ class LoginPage extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       fontSize: 15.sp,
                     ),
-              colorText: kColorWhite,
-              textSize: 14.sp,
               height: 29.sp,
             );
           }),

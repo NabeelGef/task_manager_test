@@ -19,12 +19,12 @@ class ErrorLoginState extends LoginState{
 }
 
 class MessageSuccessLoginState extends LoginState{
-  final String accessToken;
+  final int id;
 
-  MessageSuccessLoginState({required this.accessToken});
+  MessageSuccessLoginState({required this.id});
 
   @override
-  List<Object> get props =>[accessToken];
+  List<Object> get props =>[id];
 }
 
 

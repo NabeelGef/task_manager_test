@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:task_manager/core/storage/storage_handler.dart';
 import 'package:task_manager/feature/auth/login/presentation/pages/login_page.dart';
-import 'package:task_manager/feature/home/presentation/pages/tasks_page.dart';
+
+import '../../feature/task/presentation/pages/tasks_page.dart';
 
 // GoRouter configuration
 class AppRouter {
   static String loginScreen =
-      // prefs.getString("token") == null ? "/" :
-      "/";
+      StorageHandler().userId == null ? "/" : "/login";
   static String tasksScreen =
-      "/task";
-
+      StorageHandler().userId != null ? "/" : "/task";
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -45,7 +45,6 @@ CustomTransitionPage customTransitionPage(
   );
 }
 
-
 // FadeTransition(
 //         opacity: Tween<double>(begin: 0, end: 1).animate(animation),
 //         child: child,
@@ -58,11 +57,9 @@ CustomTransitionPage customTransitionPage(
 //         child: child,
 //       );
 
+// ScaleTransition(
+//   scale: Tween<double>(begin: 0, end: 1).animate(
+//       CurvedAnimation(parent: animation, curve: Curves.easeInBack)),
 
-      // ScaleTransition(
-      //   scale: Tween<double>(begin: 0, end: 1).animate(
-      //       CurvedAnimation(parent: animation, curve: Curves.easeInBack)),
-
-       
-      //   child: child,
-      // );
+//   child: child,
+// );

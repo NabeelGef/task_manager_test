@@ -6,8 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/error/failure.dart';
 import '../../../../../core/function/map_failure_to_message.dart';
-import '../../../../../core/strings/failures.dart';
-import '../../../../../core/strings/messages.dart';
 import '../../data/model/LoginModel.dart';
 import '../../domain/usecases/login_usecase.dart';
 import 'login_state.dart';
@@ -33,10 +31,10 @@ class LoginCubit extends Cubit<LoginState>{
     }
   }
   LoginState _mapFailureOrPostsToStateLogin(
-      Either<Failure, String> either) {
+      Either<Failure, int> either) {
     return either.fold(
           (failure) => ErrorLoginState(message: mapFailureToMessage(failure)),
-          (token) => MessageSuccessLoginState(accessToken: token),
+          (id) => MessageSuccessLoginState(id: id),
     );
   }
 }
