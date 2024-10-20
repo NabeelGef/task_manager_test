@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:task_manager/core/constant/colorsapp.dart';
+import 'package:task_manager/core/constant/imagepath.dart';
 import 'package:task_manager/core/widgets/app_appbar.dart';
 import 'package:task_manager/core/widgets/app_pagination_list.dart';
 import 'package:task_manager/core/widgets/app_text.dart';
@@ -49,8 +51,7 @@ class _TasksPageState extends State<TasksPage> {
         child: BlocBuilder<GetAllTaskCubit, GetAllTaskState>(
             builder: (context, state) {
           if (state is GetTasksState) {
-
-            return buildTasks(state.tasks.length, state.tasks);
+            return buildTasks(state.tasks);
           } else if (state is ErrorTaskState) {
             return Center(
               child: TryAgainWidget(onTap: () {
@@ -65,10 +66,11 @@ class _TasksPageState extends State<TasksPage> {
     );
   }
 
-  Widget buildTasks(int length, List<TodoEntity> tasks) {
+  Widget buildTasks(List<TodoEntity> tasks) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child:
+          tasks.isEmpty? Center(child: Lottie.asset(kLottieNotFound)):
       AppCustomPaginationList(
         loadingWidget: const TaskItemShimmer(),
           items: tasks,
@@ -108,7 +110,7 @@ class _TasksPageState extends State<TasksPage> {
                         onTap: () {
                           showDialog(context: context, builder: (context) {
                             return AlertEditTask(taskId: task.id,taskName:
-                            task.todo,);
+                            task.todo,completed: task.completed,);
                           });
                         },
                         child: const Icon(Icons.edit_square,color: kColorMain,)),

@@ -11,5 +11,7 @@ class Words {
   static String get cachedCarts => "CACHED_CART";
   static String get token => "TOKEN";
   static String get userId => "USERID";
+  static String get task => "TASK";
+  static String get skipPage => "SKIPPAGE";
 
 }
