@@ -21,7 +21,7 @@ class EditTaskCubit extends Cubit<EditTaskState> {
   Future<void> editTask(int taskId) async {
     if(formKey.currentState!.validate()) {
       emit(LoadingEditTaskState());
-      final failureOrDoneMessage = await editTaskUseCase(taskId,editTaskName.text,false);
+      final failureOrDoneMessage = await editTaskUseCase(taskId,editTaskName.text,taskNotifier.isCompleted.value);
       emit(_mapFailureOrPostsToStateTasks(failureOrDoneMessage));
     }
   }

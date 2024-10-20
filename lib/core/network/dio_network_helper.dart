@@ -148,6 +148,7 @@ class DioNetworkHelper extends NetworkHelper {
 
       log("url Put ==> ${ApisWords.BASEURL}/$url");
       log("header ==> $_headers");
+      log("body ==> $body");
 
     try {
       dynamic data = body;

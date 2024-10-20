@@ -17,6 +17,7 @@ import 'core/network/network_info.dart';
 import 'feature/auth/login/data/datasource/LoginRemoteDataSource.dart';
 import 'feature/auth/login/data/repositories/login_repo.dart';
 import 'feature/auth/login/domain/repositories/login_repositories.dart';
+import 'feature/task/data/datasource/task_local_data_source.dart';
 import 'feature/task/data/datasource/task_remote_data_source.dart';
 import 'feature/task/domain/repositories/task_repositories.dart';
 import 'feature/task/domain/usecases/addTaskUseCase.dart';
@@ -54,6 +55,8 @@ Future<void> init() async {
       () => LoginRemoteDataSourceImpl());
   sl.registerLazySingleton<TaskRemoteDataSource>(
       () => TaskRemoteDataSourceImpl());
+ sl.registerLazySingleton<TaskLocalDataSource>(
+      () => TaskLocalDataSourceImpl());
 
   //Repository:================>
   sl.registerLazySingleton<LoginRepositories>(() => LoginRepositoriesImpl(
@@ -62,6 +65,7 @@ Future<void> init() async {
       ));
   sl.registerLazySingleton<TaskRepo>(() => TaskRepositoriesImpl(
         taskRemoteDataSource: sl(),
+        taskLocalDataSource: sl(),
         networkInfo: sl(),
       ));
   //=================================================

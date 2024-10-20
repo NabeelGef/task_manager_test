@@ -5,26 +5,59 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:task_manager/main.dart';
-
+class Validator {
+  static bool validateUserName(String userName) {
+    return userName.isNotEmpty;
+  }
+  static bool validatePassword(String password) {
+    return password.isNotEmpty && password.length >= 8;
+  }
+}
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  group('validateUserName', () {
+    test('validateUserName should return true when the userName is not empty', () {
+      String invalidUserName = 'nabeel';
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+      // Act
+      bool result = Validator.validateUserName(invalidUserName);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+      // Assert
+      expect(result, true);
+    });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    test('validateEmail should return false when the userName is empty', () {
+      String invalidUserName = '';
+
+      // Act
+      bool result = Validator.validateUserName(invalidUserName);
+
+      // Assert
+      expect(result, false);
+    });
   });
+
+  group('validatePassword', () {
+    test('validatePassword should return true when the password is not empty '
+        'and length is greater than or equal to 8', () {
+      String validPassword = 'password123';
+
+      // Act
+      bool result = Validator.validatePassword(validPassword);
+
+      // Assert
+      expect(result, true);
+    });
+
+  test('validatePassword should return false when the password is empty '
+      'and length is less than 8', () {
+    String validPassword = '1324567';
+
+    // Act
+    bool result = Validator.validatePassword(validPassword);
+
+    // Assert
+    expect(result, false);
+  });
+});
 }

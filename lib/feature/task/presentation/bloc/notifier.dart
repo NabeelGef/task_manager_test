@@ -1,9 +1,9 @@
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class TaskNotifier{
 
-  ValueNotifier<bool> isCompleted = ValueNotifier(false);
+  final ValueNotifier<bool> isCompleted = ValueNotifier<bool>(false);
 
   setIsCompleted(bool completed){
     isCompleted.value  = completed;

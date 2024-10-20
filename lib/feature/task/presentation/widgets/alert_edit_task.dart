@@ -20,7 +20,8 @@ import '../bloc/editTaskBloc/edit_task_state.dart';
 class AlertEditTask extends StatefulWidget {
   final int taskId;
   final String taskName;
-  const AlertEditTask({super.key,required this.taskId,required this.taskName});
+  final bool completed;
+  const AlertEditTask({super.key,required this.taskId,required this.taskName,required this.completed});
 
   @override
   State<AlertEditTask> createState() => _AlertEditTaskState();
@@ -30,6 +31,7 @@ class _AlertEditTaskState extends State<AlertEditTask> {
   @override
   void initState() {
     BlocProvider.of<EditTaskCubit>(context).editTaskName.text = widget.taskName;
+    BlocProvider.of<EditTaskCubit>(context).changeIsCompleted(widget.completed);
     super.initState();
   }
 
